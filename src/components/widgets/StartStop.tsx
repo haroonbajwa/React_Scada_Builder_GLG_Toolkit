@@ -1,34 +1,12 @@
 import React, { useEffect } from "react";
 
-const Tank = ({ widgetData }: any) => {
+const StartStop = ({ widgetData }: any) => {
   console.log(widgetData);
   const GLG = new GlgToolkit();
 
-  // useEffect(() => {
-  //   const removeInnerDiv = () => {
-  //     const parentDiv = document.querySelector(
-  //       `#${widgetData.id} .GlgCanvasContainer`
-  //     );
-
-  //     console.log(parentDiv, "parent div");
-  //     if (parentDiv) {
-  //       // Find the inner div with the specified content
-  //       const innerDiv = Array.from(parentDiv.children).find(
-  //         (child) => child.innerText === "GLG Community Edition"
-  //       );
-
-  //       if (innerDiv) {
-  //         // remove
-  //         parentDiv.removeChild(innerDiv);
-  //       }
-  //     }
-  //   };
-  //   removeInnerDiv();
-  // }, [widgetData]);
-
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/tank.g",
+      "http://localhost:8000/drawings/startStop.g",
       null,
       LoadCB,
       {
@@ -38,6 +16,7 @@ const Tank = ({ widgetData }: any) => {
   }, [widgetData]);
 
   const LoadCB = (drawing, data, path) => {
+    console.log(drawing, "draw");
     if (drawing == null) {
       window.alert("Can't load drawing, check console message for details.");
       return;
@@ -47,18 +26,13 @@ const Tank = ({ widgetData }: any) => {
     loader.innerHTML = "";
 
     drawing.SetParentElement(widgetData.id);
-
     drawing.SetDResource("LineWidth", 0);
-
     StartDashboardDemo(drawing, data);
   };
 
   const StartDashboardDemo = (drawing, data) => {
     const viewport = drawing;
     viewport.InitialDraw();
-
-    // drawing.SetDResource("$Widget/Value", data.data.level);
-    // drawing.Update();
   };
 
   return (
@@ -69,9 +43,8 @@ const Tank = ({ widgetData }: any) => {
         minHeight: "170px ",
         height: "100%",
       }}
-      // style={{ width: "300px", height: "250px" }}
     ></div>
   );
 };
 
-export default Tank;
+export default StartStop;

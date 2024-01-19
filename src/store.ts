@@ -13,12 +13,26 @@ import { create } from "zustand";
 export type RFState = {
   nodes: Node[];
   edges: Edge[];
+  viewport: {
+    x: number;
+    y: number;
+    zoom: number;
+  };
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   addNode: (newNode: Node) => void;
   updateNodeData: (nodeId: string, newData: any) => void;
   addEdge: (sourceNodeId: string, targetNodeId: string) => void;
   removeEdge: (sourceNodeId: string, targetNodeId: string) => void;
+  restoreFlow: (savedState: {
+    nodes: Node[];
+    edges: Edge[];
+    viewport: {
+      x: number;
+      y: number;
+      zoom: number;
+    };
+  }) => void;
 };
 
 const useStore = create<RFState>((set, get) => ({
@@ -26,6 +40,7 @@ const useStore = create<RFState>((set, get) => ({
     {
       id: "dial",
       type: "mindmap",
+      dragHandle: ".custom-drag-handle",
       data: {
         component: "Dial",
         widgetData: {
@@ -38,6 +53,7 @@ const useStore = create<RFState>((set, get) => ({
     {
       id: "knob",
       type: "mindmap",
+      dragHandle: ".custom-drag-handle",
       data: {
         component: "Knob",
         widgetData: {
@@ -50,6 +66,7 @@ const useStore = create<RFState>((set, get) => ({
     {
       id: "tank",
       type: "mindmap",
+      dragHandle: ".custom-drag-handle",
       data: {
         component: "Tank",
         widgetData: {
@@ -59,8 +76,22 @@ const useStore = create<RFState>((set, get) => ({
       },
       position: { x: 700, y: 500 },
     },
+    {
+      id: "startStop",
+      type: "mindmap",
+      dragHandle: ".custom-drag-handle",
+      data: {
+        component: "StartStop",
+        widgetData: {
+          id: "startStop1",
+          value: 40,
+        },
+      },
+      position: { x: 750, y: 700 },
+    },
   ],
   edges: [],
+  viewport: { x: 0.5, y: 0.5, zoom: 0.5 },
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),
@@ -76,11 +107,17 @@ const useStore = create<RFState>((set, get) => ({
       nodes: [...state.nodes, newNode],
     }));
   },
-  updateNodeData: (nodeId: string, newData: any) => {
+  updateNodeData: (widgetId: string, newData: any) => {
     set((state) => ({
       nodes: state.nodes.map((node) =>
-        node.id === nodeId
-          ? { ...node, data: { ...node.data, ...newData } }
+        node.data.widgetData.id === nodeId
+          ? {
+              ...node,
+              data: {
+                ...node.data,
+                widgetData: { ...node.data.widgetData, ...newData },
+              },
+            }
           : node
       ),
     }));
@@ -105,6 +142,17 @@ const useStore = create<RFState>((set, get) => ({
           !(edge.source === sourceNodeId && edge.target === targetNodeId)
       ),
     }));
+  },
+  restoreFlow: (savedState) => {
+    set({
+      nodes: savedState.nodes || [],
+      edges: savedState.edges || [],
+      viewport: {
+        x: savedState.viewport?.x || 0,
+        y: savedState.viewport?.y || 0,
+        zoom: savedState.viewport?.zoom || 1,
+      },
+    });
   },
 }));
 

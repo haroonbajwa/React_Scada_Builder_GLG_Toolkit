@@ -52,7 +52,6 @@ const components = [
 // ];
 
 const getComponent = (nodeData) => {
-  console.log(nodeData, "node da");
   try {
     switch (nodeData.name) {
       case "Dial":

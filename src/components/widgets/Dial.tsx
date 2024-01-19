@@ -38,7 +38,10 @@ const Dial = ({ widgetData }: any) => {
   };
 
   return (
-    <div id={widgetData.id} style={{ width: "300px", height: "250px" }}></div>
+    <div
+      id={widgetData.id}
+      style={{ minWidth: "170px", minHeight: "170px", height: "100%" }}
+    ></div>
   );
 };
 

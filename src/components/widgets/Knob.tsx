@@ -14,8 +14,6 @@ const Knob = ({ widgetData }: any) => {
     );
   }, [widgetData]);
 
-  console.log(widgetData, "WidgetData from knob");
-
   const LoadCB = (drawing, data, path) => {
     if (drawing == null) {
       window.alert("Can't load drawing, check console message for details.");
@@ -32,7 +30,6 @@ const Knob = ({ widgetData }: any) => {
   };
 
   const StartDashboardDemo = (drawing, data) => {
-    console.log(data, "data cb");
     const viewport = drawing;
     viewport.InitialDraw();
 
@@ -41,7 +38,15 @@ const Knob = ({ widgetData }: any) => {
   };
 
   return (
-    <div id={widgetData.id} style={{ width: "300px", height: "250px" }}></div>
+    <div
+      id={widgetData.id}
+      style={{
+        minWidth: "170px",
+        minHeight: "170px",
+        height: "100%",
+      }}
+      // style={{ width: "300px", height: "250px" }}
+    ></div>
   );
 };
 

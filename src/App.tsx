@@ -15,9 +15,9 @@ function App() {
     //   >
     //     <Sidebar />
     //   </div>
-      <div className="canvas" style={{ height: "100%", width: "100%" }}>
-        <Flow />
-      </div>
+    <div className="canvas" style={{ height: "100%", width: "100%" }}>
+      <Flow />
+    </div>
     // </div>
     // <div style={{ display: "flex" }}>
     //   <Sidebar />
