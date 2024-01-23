@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import { removeWidgetWatermark } from "../helperFunctions";
 
 const Knob = ({ widgetData }: any) => {
   const GLG = new GlgToolkit();
-
   useEffect(() => {
     GLG.LoadWidgetFromURL(
       "http://localhost:8000/drawings/knob.g",
@@ -31,7 +31,9 @@ const Knob = ({ widgetData }: any) => {
 
   const StartDashboardDemo = (drawing, data) => {
     const viewport = drawing;
+    console.log(viewport, "viewport");
     viewport.InitialDraw();
+    removeWidgetWatermark(widgetData.id);
 
     // drawing.SetDResource("$Widget/Value", data.data.value);
     // drawing.Update();

@@ -6,6 +6,7 @@ import ReactFlow, {
   useReactFlow,
 } from "reactflow";
 import { shallow } from "zustand/shallow";
+import { v4 as uuid } from "uuid";
 
 import useStore, { RFState } from "../store";
 import "reactflow/dist/style.css";
@@ -41,16 +42,13 @@ function Flow() {
   const [rfInstance, setRfInstance] = useState(null);
   const { setViewport } = useReactFlow();
   // whenever you use multiple values, you should use shallow to make sure the component only re-renders when one of the values changes
-  const { nodes, edges, onNodesChange, onEdgesChange, restoreFlow } = useStore(
-    selector,
-    shallow
-  );
+  const { nodes, edges, onNodesChange, onEdgesChange, addNode, restoreFlow } =
+    useStore(selector, shallow);
 
   const flowKey = "exampleFlow";
 
   // save nodes and viewport dimensions
   const onSave = useCallback(() => {
-    console.log(rfInstance, "rfInstance");
     if (rfInstance) {
       const flow = rfInstance.toObject();
       localStorage.setItem(flowKey, JSON.stringify(flow));
@@ -62,7 +60,6 @@ function Flow() {
     const restore = async () => {
       const flow = JSON.parse(localStorage.getItem(flowKey));
 
-      console.log(flow, "flow to restore");
       if (flow) {
         const { x = 0, y = 0, zoom = 1 } = flow.viewport;
         restoreFlow(flow);
@@ -73,9 +70,57 @@ function Flow() {
     restore();
   }, [restoreFlow, setViewport]);
 
+  // restore saved flow on start
   useEffect(() => {
     onRestore();
   }, []);
+
+  const generateAlphabeticalID = () => {
+    const timestamp = new Date().getTime().toString(36);
+    const randomChars = Math.random().toString(36).substr(2, 5);
+    return timestamp + randomChars;
+  };
+
+  // drag and drop functions
+  const onDragOver = useCallback((event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  }, []);
+
+  const onDrop = useCallback(
+    (event) => {
+      event.preventDefault();
+      const componentString = event.dataTransfer.getData(
+        "application/reactflow"
+      );
+      // check if the dropped element is valid
+      if (typeof componentString === "undefined" || !componentString) {
+        return;
+      }
+
+      const component = JSON.parse(componentString);
+      component.widgetData.id = generateAlphabeticalID(); //update widget data id
+
+      // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
+      // and you don't need to subtract the reactFlowBounds.left/top anymore
+      // details: https://reactflow.dev/whats-new/2023-11-10
+      const position = rfInstance.screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+      const newNode = {
+        id: uuid(),
+        type: "mindmap",
+        dragHandle: ".custom-drag-handle",
+        data: component,
+        position,
+      };
+      addNode(newNode);
+    },
+    [rfInstance]
+  );
+
+  console.log(nodes, "all nodes");
 
   return (
     <>
@@ -97,6 +142,9 @@ function Flow() {
             edgeTypes={edgeTypes}
             fitView
             onInit={setRfInstance}
+            // for drag and drop
+            onDrop={onDrop}
+            onDragOver={onDragOver}
           >
             <Controls showInteractive={false} />
             <Background />

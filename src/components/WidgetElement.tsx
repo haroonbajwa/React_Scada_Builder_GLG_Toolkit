@@ -33,6 +33,7 @@ const WidgetElement = (props: { widgetData: any }) => {
           marginBottom: "15px",
         }}
       >
+        {/* <h1>asdasdasd</h1> */}
         {getComponent(widgetData)}
       </div>
     </>

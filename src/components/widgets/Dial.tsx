@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { removeWidgetWatermark } from "../helperFunctions";
 
 const Dial = ({ widgetData }: any) => {
   const GLG = new GlgToolkit();
@@ -21,18 +22,15 @@ const Dial = ({ widgetData }: any) => {
     }
 
     const loader = document.getElementById(widgetData.id);
-    loader.innerHTML = "";
+    if (loader) loader.innerHTML = "";
 
     drawing.SetParentElement(widgetData.id);
     drawing.SetDResource("LineWidth", 0);
 
-    StartDashboardDemo(drawing, data);
-  };
+    drawing.InitialDraw();
+    removeWidgetWatermark(widgetData.id);
 
-  const StartDashboardDemo = (drawing, data) => {
-    const viewport = drawing;
-    viewport.InitialDraw();
-
+    // update widget's value
     drawing.SetDResource("$Widget/Value", data.data.value);
     drawing.Update();
   };

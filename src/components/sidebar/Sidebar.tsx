@@ -1,26 +1,26 @@
-import CustomNode from "../customNode/CustomNode";
+// import CustomNode from "../customNode/CustomNode";
 import Dial from "../widgets/Dial";
 import Knob from "../widgets/Knob";
 import Tank from "../widgets/Tank";
 
 const components = [
   {
-    name: "Dial",
-    data: {
+    component: "Dial",
+    widgetData: {
       id: "dial-sidebar",
       value: 45,
     },
   },
   {
-    name: "Knob",
-    data: {
+    component: "Knob",
+    widgetData: {
       id: "knob-sidebar",
       value: 1.9,
     },
   },
   {
-    name: "Tank",
-    data: {
+    component: "Tank",
+    widgetData: {
       id: "tank-sidebar",
       value: 40,
     },
@@ -30,7 +30,7 @@ const components = [
 //   {
 //     id: "dial",
 //     type: "mindmap",
-//     data: {
+//     widgetData: {
 //       component: "Dial",
 //       widgetData: {
 //         value: 45,
@@ -41,7 +41,7 @@ const components = [
 //   {
 //     id: "knob",
 //     type: "mindmap",
-//     data: {
+//     widgetData: {
 //       component: "Knob",
 //       widgetData: {
 //         value: 1.9,
@@ -53,13 +53,13 @@ const components = [
 
 const getComponent = (nodeData) => {
   try {
-    switch (nodeData.name) {
+    switch (nodeData.component) {
       case "Dial":
-        return <Dial widgetData={nodeData.data} />;
+        return <Dial widgetData={nodeData.widgetData} />;
       case "Knob":
-        return <Knob widgetData={nodeData.data} />;
+        return <Knob widgetData={nodeData.widgetData} />;
       case "Tank":
-        return <Tank widgetData={nodeData.data} />;
+        return <Tank widgetData={nodeData.widgetData} />;
       default:
         return null;
     }
@@ -69,26 +69,35 @@ const getComponent = (nodeData) => {
 };
 
 const Sidebar = () => {
+  const onDragStart = (event, component) => {
+    const componentString = JSON.stringify(component);
+    event.dataTransfer.setData("application/reactflow", componentString);
+    event.dataTransfer.effectAllowed = "move";
+  };
+
   return (
     <div
       style={{
-        width: "350px",
-        padding: "16px",
+        width: "300px",
         backgroundColor: "#595959",
-        // borderRight: "1px solid #ccc",
+        height: "100vh",
+        overflowY: "scroll",
+        overflowX: "hidden",
       }}
     >
       {components.map((component, index) => (
         <div
           key={index}
-          style={{ width: "300px", height: "250px", margin: "5px" }}
+          style={{
+            width: "230px",
+            height: "200px",
+            margin: "5px",
+          }}
+          className="dndnode input"
+          onDragStart={(event) => onDragStart(event, component)}
+          draggable
         >
           {getComponent(component)}
-          {/* <CustomNode
-            key={index}
-            id={`custom-node-${index}`}
-            data={node.data}
-          /> */}
         </div>
       ))}
     </div>

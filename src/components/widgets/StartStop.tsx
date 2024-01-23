@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 const StartStop = ({ widgetData }: any) => {
-  console.log(widgetData);
   const GLG = new GlgToolkit();
 
   useEffect(() => {
@@ -16,7 +15,6 @@ const StartStop = ({ widgetData }: any) => {
   }, [widgetData]);
 
   const LoadCB = (drawing, data, path) => {
-    console.log(drawing, "draw");
     if (drawing == null) {
       window.alert("Can't load drawing, check console message for details.");
       return;

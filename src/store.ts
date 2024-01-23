@@ -22,6 +22,7 @@ export type RFState = {
   onEdgesChange: OnEdgesChange;
   addNode: (newNode: Node) => void;
   updateNodeData: (nodeId: string, newData: any) => void;
+  removeNode: (widgetId: string) => void;
   addEdge: (sourceNodeId: string, targetNodeId: string) => void;
   removeEdge: (sourceNodeId: string, targetNodeId: string) => void;
   restoreFlow: (savedState: {
@@ -119,6 +120,13 @@ const useStore = create<RFState>((set, get) => ({
               },
             }
           : node
+      ),
+    }));
+  },
+  removeNode: (widgetId: string) => {
+    set((state) => ({
+      nodes: state.nodes.filter(
+        (node) => !(node.data.widgetData.id === widgetId)
       ),
     }));
   },

@@ -1,15 +1,20 @@
-import { Handle, NodeProps, NodeResizer, Position } from "reactflow";
+import { useState } from "react";
+import { NodeProps, NodeResizer } from "reactflow";
+import { shallow } from "zustand/shallow";
+import useStore, { RFState } from "../../store";
+
 import Dial from "../../components/widgets/Dial";
 import Knob from "../widgets/Knob";
 import Tank from "../widgets/Tank";
+
 import { FaGear } from "react-icons/fa6";
 import { RiDraggable } from "react-icons/ri";
+import { IoClose } from "react-icons/io5";
 import { Modal, Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+
 import DialSettings from "../widgetsSettings/Dial";
 import KnobSettings from "../widgetsSettings/Knob";
 import TankSettings from "../widgetsSettings/Tank";
-import StartStop from "../widgets/StartStop";
 
 export type TNodeData = {
   component: string;
@@ -40,7 +45,6 @@ const getComponent = (nodeData: TNodeData) => {
 };
 
 const getWidgetSettings = (widgetData: TNodeData) => {
-  console.log(widgetData, "setting data");
   try {
     switch (widgetData.component) {
       case "Dial":
@@ -59,8 +63,18 @@ const getWidgetSettings = (widgetData: TNodeData) => {
   }
 };
 
+const selector = (state: RFState) => ({
+  removeNode: state.removeNode,
+});
+
 function CustomNode({ id, data, selected }: NodeProps<TNode>) {
+  const { removeNode } = useStore(selector, shallow);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const rmeoveWidget = (widget: any) => {
+    removeNode(widget.widgetData.id);
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -85,11 +99,27 @@ function CustomNode({ id, data, selected }: NodeProps<TNode>) {
           minWidth={200}
           minHeight={200}
         />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "3px",
+          }}
+        >
           <span className="custom-drag-handle">
             <RiDraggable size={26} />
           </span>
-          <FaGear style={{ cursor: "pointer" }} onClick={openModal} />
+          <div>
+            <FaGear
+              size={12}
+              style={{ cursor: "pointer" }}
+              onClick={openModal}
+            />
+            <IoClose
+              style={{ cursor: "pointer", marginLeft: "5px" }}
+              onClick={() => rmeoveWidget(data)}
+            />
+          </div>
         </div>
         {getComponent(data)}
       </div>
