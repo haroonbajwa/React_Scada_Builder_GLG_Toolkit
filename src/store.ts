@@ -21,7 +21,7 @@ export type RFState = {
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   addNode: (newNode: Node) => void;
-  updateNodeData: (nodeId: string, newData: any) => void;
+  updateNodeData: (widgetId: string, newData: any) => void;
   removeNode: (widgetId: string) => void;
   addEdge: (sourceNodeId: string, targetNodeId: string) => void;
   removeEdge: (sourceNodeId: string, targetNodeId: string) => void;
@@ -111,7 +111,7 @@ const useStore = create<RFState>((set, get) => ({
   updateNodeData: (widgetId: string, newData: any) => {
     set((state) => ({
       nodes: state.nodes.map((node) =>
-        node.data.widgetData.id === nodeId
+        node.data.widgetData.id === widgetId
           ? {
               ...node,
               data: {

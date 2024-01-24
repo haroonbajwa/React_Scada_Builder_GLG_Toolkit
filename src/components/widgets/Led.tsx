@@ -8,15 +8,13 @@ const selector = (state: RFState) => ({
   updateNodeData: state.updateNodeData,
 });
 
-const Dial = ({ widgetData }: any) => {
+const Led = ({ widgetData }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
-
-  console.log(widgetData.value, typeof widgetData.value);
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/dial.g",
+      "http://localhost:8000/drawings/led.g",
       null,
       LoadCB,
       {
@@ -41,7 +39,9 @@ const Dial = ({ widgetData }: any) => {
     removeWidgetWatermark(widgetData.id);
 
     // update widget's value
-    drawing.SetDResource("$Widget/Value", data.data.value);
+    drawing.SetDResource("$Drawing/Led0/Value", data.data.value0);
+    drawing.SetDResource("$Drawing/Led1/Value", data.data.value1);
+    drawing.SetDResource("$Drawing/Led2/Value", data.data.value2);
     drawing.Update();
   };
 
@@ -71,4 +71,4 @@ const Dial = ({ widgetData }: any) => {
   );
 };
 
-export default Dial;
+export default Led;

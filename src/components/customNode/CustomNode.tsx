@@ -15,6 +15,9 @@ import { Modal, Button } from "react-bootstrap";
 import DialSettings from "../widgetsSettings/Dial";
 import KnobSettings from "../widgetsSettings/Knob";
 import TankSettings from "../widgetsSettings/Tank";
+import Toggle from "../widgets/Toggle";
+import Led from "../widgets/Led";
+import LedSettings from "../widgetsSettings/Led";
 
 export type TNodeData = {
   component: string;
@@ -34,8 +37,10 @@ const getComponent = (nodeData: TNodeData) => {
         return <Knob widgetData={nodeData.widgetData} />;
       case "Tank":
         return <Tank widgetData={nodeData.widgetData} />;
-      // case "StartStop":
-      //   return <StartStop widgetData={nodeData.widgetData} />;
+      case "Toggle":
+        return <Toggle widgetData={nodeData.widgetData} />;
+      case "Led":
+        return <Led widgetData={nodeData.widgetData} />;
       default:
         return null;
     }
@@ -53,8 +58,10 @@ const getWidgetSettings = (widgetData: TNodeData) => {
         return <KnobSettings widgetData={widgetData.widgetData} />;
       case "Tank":
         return <TankSettings widgetData={widgetData.widgetData} />;
-      // case "StartStop":
+      // case "Toggle":
       //   return <StartStop widgetData={widgetData.widgetData} />;
+      case "Led":
+        return <LedSettings widgetData={widgetData.widgetData} />;
       default:
         return null;
     }

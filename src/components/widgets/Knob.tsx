@@ -31,7 +31,7 @@ const Knob = ({ widgetData }: any) => {
 
   const StartDashboardDemo = (drawing, data) => {
     const viewport = drawing;
-    console.log(viewport, "viewport");
+
     viewport.InitialDraw();
     removeWidgetWatermark(widgetData.id);
 

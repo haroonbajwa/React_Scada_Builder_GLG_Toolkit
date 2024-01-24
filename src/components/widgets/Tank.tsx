@@ -30,8 +30,8 @@ const Tank = ({ widgetData }: any) => {
     drawing.InitialDraw();
     removeWidgetWatermark(widgetData.id);
 
-    drawing.SetDResource("$Widget/Value", data.data.level);
-    drawing.Update();
+    // drawing.SetDResource("$Widget/level", 14);
+    // drawing.Update();
   };
 
   return (

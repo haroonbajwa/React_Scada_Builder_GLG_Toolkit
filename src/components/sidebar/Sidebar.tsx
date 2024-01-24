@@ -1,7 +1,9 @@
 // import CustomNode from "../customNode/CustomNode";
 import Dial from "../widgets/Dial";
 import Knob from "../widgets/Knob";
+import Led from "../widgets/Led";
 import Tank from "../widgets/Tank";
+import Toggle from "../widgets/Toggle";
 
 const components = [
   {
@@ -22,7 +24,23 @@ const components = [
     component: "Tank",
     widgetData: {
       id: "tank-sidebar",
-      value: 40,
+      level: 40,
+    },
+  },
+  {
+    component: "Toggle",
+    widgetData: {
+      id: "toggle-sidebar",
+      onState: 1,
+    },
+  },
+  {
+    component: "Led",
+    widgetData: {
+      id: "led-sidebar",
+      value0: 0,
+      value1: 0,
+      value2: 0,
     },
   },
 ];
@@ -60,6 +78,10 @@ const getComponent = (nodeData) => {
         return <Knob widgetData={nodeData.widgetData} />;
       case "Tank":
         return <Tank widgetData={nodeData.widgetData} />;
+      case "Toggle":
+        return <Toggle widgetData={nodeData.widgetData} />;
+      case "Led":
+        return <Led widgetData={nodeData.widgetData} />;
       default:
         return null;
     }
