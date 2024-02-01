@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
-import { removeWidgetWatermark } from "../helperFunctions";
+import { removeWidgetWatermark } from "../../helperFunctions";
 
 import { shallow } from "zustand/shallow";
-import useStore, { RFState } from "../../store";
+import useStore, { RFState } from "../../../store";
 
 const selector = (state: RFState) => ({
   updateNodeData: state.updateNodeData,
 });
 
-const Dial = ({ widgetData }: any) => {
+const Dial2 = ({ widgetData }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
 
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/dials/dial1.g",
+      "http://localhost:8000/drawings/dials/dial2.g",
       null,
       LoadCB,
       {
@@ -72,4 +72,4 @@ const Dial = ({ widgetData }: any) => {
   );
 };
 
-export default Dial;
+export default Dial2;

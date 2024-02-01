@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
-import { removeWidgetWatermark } from "../helperFunctions";
+import { removeWidgetWatermark } from "../../helperFunctions";
 
 import { shallow } from "zustand/shallow";
-import useStore, { RFState } from "../../store";
+import useStore, { RFState } from "../../../store";
 
 const selector = (state: RFState) => ({
   updateNodeData: state.updateNodeData,
 });
 
-const Led = ({ widgetData }: any) => {
+const Led1 = ({ widgetData }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/leds/led2.g",
+      "http://localhost:8000/drawings/leds/led1.g",
       null,
       LoadCB,
       {
@@ -71,4 +71,4 @@ const Led = ({ widgetData }: any) => {
   );
 };
 
-export default Led;
+export default Led1;

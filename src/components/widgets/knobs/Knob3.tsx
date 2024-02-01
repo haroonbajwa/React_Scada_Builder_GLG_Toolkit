@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { removeWidgetWatermark } from "../helperFunctions";
+import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Knob = ({ widgetData }: any) => {
+const Knob3 = ({ widgetData }: any) => {
   const GLG = new GlgToolkit();
   useEffect(() => {
     GLG.LoadWidgetFromURL(
@@ -52,4 +52,4 @@ const Knob = ({ widgetData }: any) => {
   );
 };
 
-export default Knob;
+export default Knob3;

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { removeWidgetWatermark } from "../helperFunctions";
+import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Tank = ({ widgetData }: any) => {
+const Tank1 = ({ widgetData }: any) => {
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/tanks/tank3.g",
+      "http://localhost:8000/drawings/tanks/tank1.g",
       null,
       LoadCB,
       {
@@ -63,4 +63,4 @@ const Tank = ({ widgetData }: any) => {
   );
 };
 
-export default Tank;
+export default Tank1;

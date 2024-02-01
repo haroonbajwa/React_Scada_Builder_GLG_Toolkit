@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { removeWidgetWatermark } from "../helperFunctions";
+import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Toggle = ({ widgetData }: any) => {
+const Toggle1 = ({ widgetData }: any) => {
   const [toggleState, setToggleState] = useState();
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/toggles/toggle6.g",
+      "http://localhost:8000/drawings/toggles/toggle1.g",
       null,
       LoadCB,
       {
@@ -64,4 +64,4 @@ const Toggle = ({ widgetData }: any) => {
   );
 };
 
-export default Toggle;
+export default Toggle1;

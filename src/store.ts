@@ -22,6 +22,7 @@ export type RFState = {
   onEdgesChange: OnEdgesChange;
   addNode: (newNode: Node) => void;
   updateNodeData: (widgetId: string, newData: any) => void;
+  updateZIndex: (widgetId: string, direction: string) => void;
   removeNode: (widgetId: string) => void;
   addEdge: (sourceNodeId: string, targetNodeId: string) => void;
   removeEdge: (sourceNodeId: string, targetNodeId: string) => void;
@@ -37,47 +38,7 @@ export type RFState = {
 };
 
 const useStore = create<RFState>((set, get) => ({
-  nodes: [
-    {
-      id: "dial",
-      type: "mindmap",
-      dragHandle: ".custom-drag-handle",
-      data: {
-        component: "Dial",
-        widgetData: {
-          id: "dial1",
-          value: 45,
-        },
-      },
-      position: { x: 300, y: 400 },
-    },
-    {
-      id: "knob",
-      type: "mindmap",
-      dragHandle: ".custom-drag-handle",
-      data: {
-        component: "Knob",
-        widgetData: {
-          id: "knob1",
-          value: 1.9,
-        },
-      },
-      position: { x: 550, y: 450 },
-    },
-    {
-      id: "tank",
-      type: "mindmap",
-      dragHandle: ".custom-drag-handle",
-      data: {
-        component: "Tank",
-        widgetData: {
-          id: "tank1",
-          level: 40,
-        },
-      },
-      position: { x: 700, y: 500 },
-    },
-  ],
+  nodes: [],
   edges: [],
   viewport: { x: 0.5, y: 0.5, zoom: 0.5 },
   onNodesChange: (changes: NodeChange[]) => {
@@ -108,6 +69,22 @@ const useStore = create<RFState>((set, get) => ({
             }
           : node
       ),
+    }));
+  },
+  updateZIndex: (widgetId: string, direction: string) => {
+    set((state) => ({
+      nodes: state.nodes.map((node) => {
+        console.log(node, "widget to update");
+        return node.data.widgetData.id === widgetId
+          ? {
+              ...node,
+              zIndex:
+                direction === "back"
+                  ? Number(node.zIndex - 1)
+                  : Number(node.zIndex + 1),
+            }
+          : node;
+      }),
     }));
   },
   removeNode: (widgetId: string) => {
