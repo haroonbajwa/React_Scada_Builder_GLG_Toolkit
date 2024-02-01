@@ -77,19 +77,6 @@ const useStore = create<RFState>((set, get) => ({
       },
       position: { x: 700, y: 500 },
     },
-    {
-      id: "startStop",
-      type: "mindmap",
-      dragHandle: ".custom-drag-handle",
-      data: {
-        component: "StartStop",
-        widgetData: {
-          id: "startStop1",
-          value: 40,
-        },
-      },
-      position: { x: 750, y: 700 },
-    },
   ],
   edges: [],
   viewport: { x: 0.5, y: 0.5, zoom: 0.5 },

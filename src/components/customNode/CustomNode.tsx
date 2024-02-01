@@ -96,7 +96,8 @@ function CustomNode({ id, data, selected }: NodeProps<TNode>) {
       <div
         id={id}
         style={{
-          height: "80%",
+          // height: "100%",
+          height: "calc(100% - 34px)",
           cursor: "unset",
         }}
       >
@@ -105,6 +106,7 @@ function CustomNode({ id, data, selected }: NodeProps<TNode>) {
           isVisible={selected}
           minWidth={200}
           minHeight={200}
+          keepAspectRatio
         />
         <div
           style={{

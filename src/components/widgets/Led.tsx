@@ -14,7 +14,7 @@ const Led = ({ widgetData }: any) => {
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/led.g",
+      "http://localhost:8000/drawings/leds/led2.g",
       null,
       LoadCB,
       {

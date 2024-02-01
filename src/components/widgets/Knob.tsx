@@ -5,7 +5,7 @@ const Knob = ({ widgetData }: any) => {
   const GLG = new GlgToolkit();
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/knob.g",
+      "http://localhost:8000/drawings/knobs/knob3.g",
       null,
       LoadCB,
       {

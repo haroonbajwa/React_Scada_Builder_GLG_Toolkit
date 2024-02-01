@@ -11,12 +11,11 @@ const selector = (state: RFState) => ({
 const Dial = ({ widgetData }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
 
-  console.log(widgetData.value, typeof widgetData.value);
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/dial.g",
+      "http://localhost:8000/drawings/dials/dial1.g",
       null,
       LoadCB,
       {
@@ -28,6 +27,7 @@ const Dial = ({ widgetData }: any) => {
   const LoadCB = (drawing, data, path) => {
     if (drawing == null) {
       window.alert("Can't load drawing, check console message for details.");
+      // console.log("Can't load drawing, check console message for details.");
       return;
     }
 
@@ -66,6 +66,7 @@ const Dial = ({ widgetData }: any) => {
   return (
     <div
       id={widgetData.id}
+      // style={{ height: "100%" }}
       style={{ minWidth: "170px", minHeight: "170px", height: "100%" }}
     ></div>
   );

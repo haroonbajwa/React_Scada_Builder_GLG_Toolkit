@@ -7,7 +7,7 @@ const Toggle = ({ widgetData }: any) => {
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/toggle.g",
+      "http://localhost:8000/drawings/toggles/toggle6.g",
       null,
       LoadCB,
       {
@@ -33,7 +33,6 @@ const Toggle = ({ widgetData }: any) => {
     drawing.InitialDraw();
     removeWidgetWatermark(widgetData.id);
   };
-  console.log(toggleState, "Toggle state");
 
   // Event handler for toggle control value change
   const handleToggleChange = (vp, message_obj) => {
