@@ -1,5 +1,5 @@
-import Dial from "./widgets/dials/Dial1";
-import Knob from "./widgets/knobs/Knob1";
+import Dial from "./widgets/dials/Dial";
+import Knob from "./widgets/knobs/Knob";
 
 const WidgetElement = (props: { widgetData: any }) => {
   const { widgetData } = props;

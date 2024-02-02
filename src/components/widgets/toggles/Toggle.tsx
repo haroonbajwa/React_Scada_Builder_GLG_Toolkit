@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Toggle1 = ({ widgetData }: any) => {
+const Toggle = ({ widgetData, widgetDesign }: any) => {
   const [toggleState, setToggleState] = useState();
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/toggles/toggle1.g",
+      `http://localhost:8000/drawings/toggles/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -52,16 +52,7 @@ const Toggle1 = ({ widgetData }: any) => {
     }
   };
 
-  return (
-    <div
-      id={widgetData.id}
-      style={{
-        minWidth: "170px",
-        minHeight: "170px ",
-        height: "100%",
-      }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Toggle1;
+export default Toggle;

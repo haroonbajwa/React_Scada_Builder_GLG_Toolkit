@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Knob3 = ({ widgetData }: any) => {
+const Knob = ({ widgetData, widgetDesign }: any) => {
   const GLG = new GlgToolkit();
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/knobs/knob3.g",
+      `http://localhost:8000/drawings/knobs/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -26,6 +26,9 @@ const Knob3 = ({ widgetData }: any) => {
     drawing.SetParentElement(widgetData.id);
     drawing.SetDResource("LineWidth", 0);
 
+    // if widget is in sidebar then disable the input
+    // drawing.SetDResource("DisableInput", 1);
+
     StartDashboardDemo(drawing, data);
   };
 
@@ -39,17 +42,7 @@ const Knob3 = ({ widgetData }: any) => {
     // drawing.Update();
   };
 
-  return (
-    <div
-      id={widgetData.id}
-      style={{
-        minWidth: "170px",
-        minHeight: "170px",
-        height: "100%",
-      }}
-      // style={{ width: "300px", height: "250px" }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Knob3;
+export default Knob;

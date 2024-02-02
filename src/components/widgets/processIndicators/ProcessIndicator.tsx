@@ -8,14 +8,14 @@ const selector = (state: RFState) => ({
   updateNodeData: state.updateNodeData,
 });
 
-const Dial2 = ({ widgetData }: any) => {
+const ProcessIndicator = ({ widgetData, widgetDesign }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
 
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/dials/dial2.g",
+      `http://localhost:8000/drawings/processIndicators/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -63,13 +63,7 @@ const Dial2 = ({ widgetData }: any) => {
     return () => clearInterval(intervalId);
   }, [widgetData, updateNodeData]);
 
-  return (
-    <div
-      id={widgetData.id}
-      // style={{ height: "100%" }}
-      style={{ minWidth: "170px", minHeight: "170px", height: "100%" }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Dial2;
+export default ProcessIndicator;

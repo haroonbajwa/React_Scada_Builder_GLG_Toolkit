@@ -12,6 +12,12 @@ export const getWidgetSettings = (widgetData) => {
       case "Dial3":
       case "Dial4":
       case "Dial5":
+      case "Dial6":
+      case "Dial7":
+      case "Dial8":
+      case "Dial9":
+      case "Dial10":
+      case "Dial11":
         return <DialSettings widgetData={widgetData.widgetData} />;
 
       // knobs settings
@@ -20,6 +26,11 @@ export const getWidgetSettings = (widgetData) => {
       case "Knob3":
       case "Knob4":
       case "Knob5":
+      case "Knob6":
+      case "Knob7":
+      case "Knob8":
+      case "Knob9":
+      case "Knob10":
         return <KnobSettings widgetData={widgetData.widgetData} />;
 
       // tanks settings

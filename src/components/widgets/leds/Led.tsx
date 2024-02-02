@@ -8,14 +8,13 @@ const selector = (state: RFState) => ({
   updateNodeData: state.updateNodeData,
 });
 
-const Dial3 = ({ widgetData }: any) => {
+const Led = ({ widgetData, widgetDesign }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
-
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/dials/dial3.g",
+      `http://localhost:8000/drawings/leds/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -27,7 +26,6 @@ const Dial3 = ({ widgetData }: any) => {
   const LoadCB = (drawing, data, path) => {
     if (drawing == null) {
       window.alert("Can't load drawing, check console message for details.");
-      // console.log("Can't load drawing, check console message for details.");
       return;
     }
 
@@ -63,13 +61,7 @@ const Dial3 = ({ widgetData }: any) => {
     return () => clearInterval(intervalId);
   }, [widgetData, updateNodeData]);
 
-  return (
-    <div
-      id={widgetData.id}
-      // style={{ height: "100%" }}
-      style={{ minWidth: "170px", minHeight: "170px", height: "100%" }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Dial3;
+export default Led;

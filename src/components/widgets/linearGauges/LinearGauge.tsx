@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Knob4 = ({ widgetData }: any) => {
+const LinearGauge = ({ widgetData, widgetDesign }: any) => {
   const GLG = new GlgToolkit();
+
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/knobs/knob4.g",
+      `http://localhost:8000/drawings/linearGauges/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -26,30 +27,11 @@ const Knob4 = ({ widgetData }: any) => {
     drawing.SetParentElement(widgetData.id);
     drawing.SetDResource("LineWidth", 0);
 
-    StartDashboardDemo(drawing, data);
-  };
-
-  const StartDashboardDemo = (drawing, data) => {
-    const viewport = drawing;
-
-    viewport.InitialDraw();
+    drawing.InitialDraw();
     removeWidgetWatermark(widgetData.id);
-
-    // drawing.SetDResource("$Widget/Value", data.data.value);
-    // drawing.Update();
   };
 
-  return (
-    <div
-      id={widgetData.id}
-      style={{
-        minWidth: "170px",
-        minHeight: "170px",
-        height: "100%",
-      }}
-      // style={{ width: "300px", height: "250px" }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Knob4;
+export default LinearGauge;

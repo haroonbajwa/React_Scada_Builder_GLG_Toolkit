@@ -8,13 +8,14 @@ const selector = (state: RFState) => ({
   updateNodeData: state.updateNodeData,
 });
 
-const Led1 = ({ widgetData }: any) => {
+const StateIndicator = ({ widgetData, widgetDesign }: any) => {
   const { updateNodeData } = useStore(selector, shallow);
+
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/leds/led1.g",
+      `http://localhost:8000/drawings/stateIndicators/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -26,6 +27,7 @@ const Led1 = ({ widgetData }: any) => {
   const LoadCB = (drawing, data, path) => {
     if (drawing == null) {
       window.alert("Can't load drawing, check console message for details.");
+      // console.log("Can't load drawing, check console message for details.");
       return;
     }
 
@@ -39,9 +41,7 @@ const Led1 = ({ widgetData }: any) => {
     removeWidgetWatermark(widgetData.id);
 
     // update widget's value
-    drawing.SetDResource("$Drawing/Led0/Value", data.data.value0);
-    drawing.SetDResource("$Drawing/Led1/Value", data.data.value1);
-    drawing.SetDResource("$Drawing/Led2/Value", data.data.value2);
+    drawing.SetDResource("$Widget/Value", data.data.value);
     drawing.Update();
   };
 
@@ -63,12 +63,7 @@ const Led1 = ({ widgetData }: any) => {
     return () => clearInterval(intervalId);
   }, [widgetData, updateNodeData]);
 
-  return (
-    <div
-      id={widgetData.id}
-      style={{ minWidth: "170px", minHeight: "170px", height: "100%" }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Led1;
+export default StateIndicator;

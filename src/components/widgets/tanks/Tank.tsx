@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { removeWidgetWatermark } from "../../helperFunctions";
 
-const Tank1 = ({ widgetData }: any) => {
+const Tank = ({ widgetData, widgetDesign }: any) => {
   const GLG = new GlgToolkit();
 
   useEffect(() => {
     GLG.LoadWidgetFromURL(
-      "http://localhost:8000/drawings/tanks/tank1.g",
+      `http://localhost:8000/drawings/tanks/${widgetDesign}.g`,
       null,
       LoadCB,
       {
@@ -50,17 +50,7 @@ const Tank1 = ({ widgetData }: any) => {
     // drawing.Update();
   };
 
-  return (
-    <div
-      id={widgetData.id}
-      style={{
-        minWidth: "170px",
-        minHeight: "170px ",
-        height: "100%",
-      }}
-      // style={{ width: "300px", height: "250px" }}
-    ></div>
-  );
+  return <div id={widgetData.id} className="widget-node"></div>;
 };
 
-export default Tank1;
+export default Tank;
