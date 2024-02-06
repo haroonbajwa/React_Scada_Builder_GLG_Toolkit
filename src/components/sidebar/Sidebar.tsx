@@ -37,7 +37,10 @@ const Sidebar = () => {
                     draggable
                     onDragStart={(event) => onDragStart(event, component)}
                   >
-                    {getWidgetComponent(component)}
+                    {getWidgetComponent({
+                      nodeData: component,
+                      disableInput: true,
+                    })}
                   </div>
                 ))}
               </Accordion.Body>

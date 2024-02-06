@@ -1,4 +1,5 @@
 import DialSettings from "../widgetsSettings/Dial";
+import ExternalResourceSettings from "../widgetsSettings/ExternalResource";
 import KnobSettings from "../widgetsSettings/Knob";
 import LedSettings from "../widgetsSettings/Led";
 import TankSettings from "../widgetsSettings/Tank";
@@ -40,6 +41,29 @@ export const getWidgetSettings = (widgetData) => {
       // leds settings
       case "Led1":
         return <LedSettings widgetData={widgetData.widgetData} />;
+
+      // external resources
+      case "ExternalImage":
+        return (
+          <ExternalResourceSettings
+            widgetData={widgetData.widgetData}
+            type="image"
+          />
+        );
+      case "ExternalVideo":
+        return (
+          <ExternalResourceSettings
+            widgetData={widgetData.widgetData}
+            type="video"
+          />
+        );
+      case "ExternalWeb":
+        return (
+          <ExternalResourceSettings
+            widgetData={widgetData.widgetData}
+            type="web"
+          />
+        );
       default:
         return null;
     }

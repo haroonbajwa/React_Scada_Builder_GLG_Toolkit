@@ -11,8 +11,22 @@ import Knob from "../widgets/knobs/Knob";
 import ValueDisplay from "../widgets/valueDisaplys/ValueDisplay";
 import StateIndicator from "../widgets/stateIndicators/StateIndicator";
 import ProcessIndicator from "../widgets/processIndicators/ProcessIndicator";
+import ProcessControl from "../widgets/processControls/ProcessControl";
+import Motor from "../widgets/motors/Motor";
+import Valve from "../widgets/valves/Valve";
+import ExternalImage from "../widgets/externalResources/ExternalImage";
+import InputField from "../widgets/inputFields/InputField";
+import React from "react";
 
-export const getWidgetComponent = (nodeData) => {
+interface Props {
+  nodeData: { component: string; widgetData: any };
+  disableInput?: boolean;
+}
+
+export const getWidgetComponent: React.FC<Props> = ({
+  nodeData,
+  disableInput = false,
+}) => {
   try {
     switch (nodeData.component) {
       // dials
@@ -203,6 +217,81 @@ export const getWidgetComponent = (nodeData) => {
           />
         );
 
+      // motors
+      case "BlowerOrFan":
+        return (
+          <Motor widgetData={nodeData.widgetData} widgetDesign="blowerOrFan" />
+        );
+      case "CentrifugalFan":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="centrifugalFan"
+          />
+        );
+      case "CentrifugalPump":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="centrifugalPump"
+          />
+        );
+      case "DisplacementPump":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="displacementPump"
+          />
+        );
+      case "EngineDriver":
+        return (
+          <Motor widgetData={nodeData.widgetData} widgetDesign="engineDriver" />
+        );
+      case "Fan":
+        return <Motor widgetData={nodeData.widgetData} widgetDesign="fan" />;
+      case "InjectorEjector":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="injectorEjector"
+          />
+        );
+      case "Motor1":
+        return <Motor widgetData={nodeData.widgetData} widgetDesign="motor1" />;
+      case "Motor2":
+        return <Motor widgetData={nodeData.widgetData} widgetDesign="motor2" />;
+      case "Motor3":
+        return <Motor widgetData={nodeData.widgetData} widgetDesign="motor3" />;
+      case "ReciprocatingPump":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="reciprocatingPump"
+          />
+        );
+      case "RotaryPump":
+        return (
+          <Motor widgetData={nodeData.widgetData} widgetDesign="rotaryPump" />
+        );
+      case "SumpPump":
+        return (
+          <Motor widgetData={nodeData.widgetData} widgetDesign="sumpPump" />
+        );
+      case "TurbineCompressor":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="turbineCompressor"
+          />
+        );
+      case "TurbineDriver":
+        return (
+          <Motor
+            widgetData={nodeData.widgetData}
+            widgetDesign="turbineDriver"
+          />
+        );
+
       // process indicators
       case "Flowmeter":
         return (
@@ -211,21 +300,21 @@ export const getWidgetComponent = (nodeData) => {
             widgetDesign="flowmeter"
           />
         );
-      case "Gauge1":
+      case "ProcessGauge1":
         return (
           <ProcessIndicator
             widgetData={nodeData.widgetData}
             widgetDesign="gauge1"
           />
         );
-      case "Gauge2":
+      case "ProcessGauge2":
         return (
           <ProcessIndicator
             widgetData={nodeData.widgetData}
             widgetDesign="gauge2"
           />
         );
-      case "Gauge3":
+      case "ProcessGauge3":
         return (
           <ProcessIndicator
             widgetData={nodeData.widgetData}
@@ -293,6 +382,190 @@ export const getWidgetComponent = (nodeData) => {
           <ProcessIndicator
             widgetData={nodeData.widgetData}
             widgetDesign="venturi"
+          />
+        );
+
+      // process controls
+      case "BallMill":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="ballMill"
+          />
+        );
+      case "BriquettingMachine":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="briquettingMachine"
+          />
+        );
+      case "BucketConveyor":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="bucketConveyor"
+          />
+        );
+      case "Centrifuge":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="centrifuge"
+          />
+        );
+      case "Conveyor":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="conveyor"
+          />
+        );
+      case "Cyclone":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="cyclone"
+          />
+        );
+      case "DrumFilter":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="drumFilter"
+          />
+        );
+      case "ElectricalPrecipitator":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="electricalPrecipitator"
+          />
+        );
+      case "FilterOrStrainer":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="filterOrStrainer"
+          />
+        );
+      case "FilterPress":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="filterPress"
+          />
+        );
+      case "GasBurner":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="gasBurner"
+          />
+        );
+      case "Grinder":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="grinder"
+          />
+        );
+      case "HammerCrusher":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="hammerCrusher"
+          />
+        );
+      case "Hoist":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="hoist"
+          />
+        );
+      case "Mixer1":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="mixer1"
+          />
+        );
+      case "Mixer2":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="mixer2"
+          />
+        );
+      case "OilBurner":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="oilBurner"
+          />
+        );
+      case "RollerCrusher":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="rollerCrusher"
+          />
+        );
+      case "RotaryDryer":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="rotaryDryer"
+          />
+        );
+      case "Screener":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="screener"
+          />
+        );
+      case "ScrewConveyor":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="screwConveyor"
+          />
+        );
+      case "Separator":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="separator"
+          />
+        );
+      case "SlopeConveyor":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="slopeConveyor"
+          />
+        );
+      case "Thickener":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="thickener"
+          />
+        );
+      case "TrayDryer":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="trayDryer"
+          />
+        );
+      case "TunnelDryer":
+        return (
+          <ProcessControl
+            widgetData={nodeData.widgetData}
+            widgetDesign="tunnelDryer"
           />
         );
 
@@ -637,6 +910,78 @@ export const getWidgetComponent = (nodeData) => {
             widgetDesign="pushButton10"
           />
         );
+
+      // valves
+      case "Valve1":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve1" />;
+      case "Valve2":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve2" />;
+      case "Valve3":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve3" />;
+      case "Valve4":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve4" />;
+      case "Valve5":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve5" />;
+      case "Valve6":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve6" />;
+      case "Valve7":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve7" />;
+      case "Valve8":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve8" />;
+      case "Valve9":
+        return <Valve widgetData={nodeData.widgetData} widgetDesign="valve9" />;
+      case "Valve10":
+        return (
+          <Valve widgetData={nodeData.widgetData} widgetDesign="valve10" />
+        );
+      case "Valve11":
+        return (
+          <Valve widgetData={nodeData.widgetData} widgetDesign="valve11" />
+        );
+      case "Valve12":
+        return (
+          <Valve widgetData={nodeData.widgetData} widgetDesign="valve12" />
+        );
+      case "Valve13":
+        return (
+          <Valve widgetData={nodeData.widgetData} widgetDesign="valve13" />
+        );
+      case "Valve14":
+        return (
+          <Valve widgetData={nodeData.widgetData} widgetDesign="valve14" />
+        );
+      case "Valve15":
+        return (
+          <Valve widgetData={nodeData.widgetData} widgetDesign="valve15" />
+        );
+
+      // external resources
+      case "ExternalImage":
+        return <ExternalImage widgetData={nodeData.widgetData} type="image" />;
+      case "ExternalVideo":
+        return (
+          <ExternalImage
+            widgetData={nodeData.widgetData}
+            type="video"
+            disableInput={disableInput}
+          />
+        );
+      case "ExternalWeb":
+        return (
+          <ExternalImage
+            widgetData={nodeData.widgetData}
+            type="web"
+            disableInput={disableInput}
+          />
+        );
+
+      // input fields
+      case "TextField":
+        return <InputField widgetData={nodeData.widgetData} type="text" />;
+      case "Checkbox":
+        return <InputField widgetData={nodeData.widgetData} type="checkbox" />;
+      case "NumberField":
+        return <InputField widgetData={nodeData.widgetData} type="number" />;
 
       default:
         return null;

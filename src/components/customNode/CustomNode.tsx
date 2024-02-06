@@ -93,7 +93,7 @@ function CustomNode({ id, data, selected }: NodeProps<TNode>) {
             />
           </div>
         </div>
-        {getWidgetComponent(data)}
+        {getWidgetComponent({ nodeData: data })}
       </div>
 
       <Modal show={isModalOpen} onHide={closeModal}>
