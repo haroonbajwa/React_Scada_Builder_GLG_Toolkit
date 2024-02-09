@@ -90,9 +90,37 @@ const externalWebData = () => ({
   link: "https://bestplant.com/",
 });
 
-const inputFieldsCommonData = () => ({
+const inputTextFieldData = () => ({
   id: alphabeticUniqueID(),
-  type: "text",
+  // type: "text",
+  value: "",
+  placeholder: "Enter text value",
+  buttonText: "Update",
+  disabled: false,
+  readOnly: false,
+  maxLength: 50,
+});
+
+const inputNumberFieldData = () => ({
+  id: alphabeticUniqueID(),
+  // type: "text",
+  value: "",
+  placeholder: "0",
+  buttonText: "Update",
+  disabled: false,
+  readOnly: false,
+  min: 0,
+  max: 100,
+  step: 5,
+});
+
+const inputCheckboxFieldData = () => ({
+  id: alphabeticUniqueID(),
+  // type: "text",
+  checked: false,
+  label: "Enable/Disable",
+  disabled: false,
+  readOnly: false,
 });
 
 // widgets default settings to show in sidebar
@@ -393,8 +421,8 @@ export const widgets = {
 
   // external resources
   inputFields: [
-    { component: "TextField", widgetData: inputFieldsCommonData() },
-    { component: "Checkbox", widgetData: inputFieldsCommonData() },
-    { component: "NumberField", widgetData: inputFieldsCommonData() },
+    { component: "TextField", widgetData: inputTextFieldData() },
+    { component: "NumberField", widgetData: inputNumberFieldData() },
+    { component: "Checkbox", widgetData: inputCheckboxFieldData() },
   ],
 };

@@ -1,7 +1,7 @@
 import { Image } from "react-bootstrap";
 import ReactPlayer from "react-player";
 
-const ExternalImage = ({ widgetData, type, disableInput }: any) => {
+const ExternalResource = ({ widgetData, type, disableInput }: any) => {
   // Render different content based on the type
   const renderContent = () => {
     switch (type) {
@@ -44,4 +44,4 @@ const ExternalImage = ({ widgetData, type, disableInput }: any) => {
   );
 };
 
-export default ExternalImage;
+export default ExternalResource;

@@ -105,9 +105,9 @@ function CustomNode({ id, data, selected }: NodeProps<TNode>) {
           <Button variant="secondary" onClick={closeModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={closeModal}>
+          {/* <Button variant="primary" onClick={closeModal}>
             Save Changes
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </>

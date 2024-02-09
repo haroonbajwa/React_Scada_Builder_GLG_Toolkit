@@ -1,5 +1,6 @@
 import DialSettings from "../widgetsSettings/Dial";
 import ExternalResourceSettings from "../widgetsSettings/ExternalResource";
+import InputFieldSettings from "../widgetsSettings/InputField";
 import KnobSettings from "../widgetsSettings/Knob";
 import LedSettings from "../widgetsSettings/Led";
 import TankSettings from "../widgetsSettings/Tank";
@@ -62,6 +63,26 @@ export const getWidgetSettings = (widgetData) => {
           <ExternalResourceSettings
             widgetData={widgetData.widgetData}
             type="web"
+          />
+        );
+
+      // input fields
+      case "TextField":
+        return (
+          <InputFieldSettings widgetData={widgetData.widgetData} type="text" />
+        );
+      case "NumberField":
+        return (
+          <InputFieldSettings
+            widgetData={widgetData.widgetData}
+            type="number"
+          />
+        );
+      case "Checkbox":
+        return (
+          <InputFieldSettings
+            widgetData={widgetData.widgetData}
+            type="checkbox"
           />
         );
       default:

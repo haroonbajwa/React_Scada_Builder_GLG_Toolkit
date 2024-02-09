@@ -116,7 +116,7 @@ function Flow() {
     [rfInstance]
   );
 
-  // console.log(nodes, "all nodes");
+  console.log(nodes, "all nodes");
 
   return (
     <>

@@ -14,7 +14,7 @@ import ProcessIndicator from "../widgets/processIndicators/ProcessIndicator";
 import ProcessControl from "../widgets/processControls/ProcessControl";
 import Motor from "../widgets/motors/Motor";
 import Valve from "../widgets/valves/Valve";
-import ExternalImage from "../widgets/externalResources/ExternalImage";
+import ExternalResource from "../widgets/externalResources/ExternalResource";
 import InputField from "../widgets/inputFields/InputField";
 import React from "react";
 
@@ -957,10 +957,12 @@ export const getWidgetComponent: React.FC<Props> = ({
 
       // external resources
       case "ExternalImage":
-        return <ExternalImage widgetData={nodeData.widgetData} type="image" />;
+        return (
+          <ExternalResource widgetData={nodeData.widgetData} type="image" />
+        );
       case "ExternalVideo":
         return (
-          <ExternalImage
+          <ExternalResource
             widgetData={nodeData.widgetData}
             type="video"
             disableInput={disableInput}
@@ -968,7 +970,7 @@ export const getWidgetComponent: React.FC<Props> = ({
         );
       case "ExternalWeb":
         return (
-          <ExternalImage
+          <ExternalResource
             widgetData={nodeData.widgetData}
             type="web"
             disableInput={disableInput}
@@ -982,6 +984,8 @@ export const getWidgetComponent: React.FC<Props> = ({
         return <InputField widgetData={nodeData.widgetData} type="checkbox" />;
       case "NumberField":
         return <InputField widgetData={nodeData.widgetData} type="number" />;
+      // case "SelectField":
+      //   return <InputField widgetData={nodeData.widgetData} type="select" />;
 
       default:
         return null;
